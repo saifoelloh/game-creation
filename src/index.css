@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  width: 100%;
+  padding: 1rem;
+  background-color: lightblue;
+}
+
+.navbar-content {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-item {
+  cursor: pointer;
+  display: flex;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+.navbar-item:hover {
+  background-color: darkslateblue;
+  height: 2px;
+  margin-top: 5px;
+}
+
+.square {
+  height: 450px;
+  width: 450px;
+  border: 1px solid black;
+}
+
+.tictactoe {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+}
+
+.tictactoe-item {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid black;
+}

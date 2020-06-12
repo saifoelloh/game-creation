@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
 import { checkMovement, checkSelection } from './controller/path'
+import { CheckPossibilities } from './controller/path.js'
 import '../../index.css'
 
 const TicTacToe = () => {
@@ -30,17 +31,16 @@ const TicTacToe = () => {
 
   const handleClick = (row = -1, col = -1) => {
     const player = players[turn].name
+    const new_tics = [
+      ...tics.map((items = [], id = 0) =>
+        items.map((item = Object, idx = 0) =>
+          row === id && col === idx ? { player, status: !item.status } : item,
+        ),
+      ),
+    ]
+
     if (!win) {
       if (checkSelection(row, col, tics)) {
-        const new_tics = [
-          ...tics.map((items, id) =>
-            items.map((item, idx) =>
-              row === id && col === idx
-                ? { player, status: !item.status }
-                : item,
-            ),
-          ),
-        ]
         setTics(new_tics)
         winnerCheck(player, new_tics)
         setTurn(turn > 0 ? 0 : 1)
@@ -56,7 +56,20 @@ const TicTacToe = () => {
     }
   }
 
+  const checkPossibilities = () => {
+    // verticalPath
+    const avail = tics.map((row = [], x) => {
+      const foo = row.filter(({ player = '', status = false }, y) =>
+        player === '' ? { x, y } : player !== 'human' ? 1 : -1,
+      )
+    })
+    // horizontalPath
+    // crossPath
+    console.table(avail)
+  }
+
   const computerMovement = () => {
+    checkPossibilities()
     if (players[turn].name === 'computer' && !win) {
       const xrand = Math.round(Math.random() * Math.floor(2))
       const yrand = Math.round(Math.random() * Math.floor(2))

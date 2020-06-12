@@ -2,7 +2,7 @@ export const checkSelection = (row = -1, col = -1, arr) => {
   return !arr[row][col].status
 }
 
-const horizontalPath = (arr = [], player = "") => {
+const horizontalPath = (arr = [], player = '') => {
   const temp = arr.map((items = []) =>
     items.reduce((acc, cur) => {
       if (cur.player === player) {
@@ -17,7 +17,7 @@ const horizontalPath = (arr = [], player = "") => {
   return status.length > 0
 }
 
-const verticalPath = (arr = [], player = "") => {
+const verticalPath = (arr = [], player = '') => {
   const temp = arr.map((items = [], id) =>
     items.reduce((acc, cur, idx) => {
       const temp = arr[idx][id]
@@ -33,7 +33,7 @@ const verticalPath = (arr = [], player = "") => {
   return status.length > 0
 }
 
-const crossPath = (arr = [], player = "") => {
+const crossPath = (arr = [], player = '') => {
   const temp = arr.map((items = []) =>
     items.reduce((acc, cur, idx) => {
       const temp = arr[idx][idx]
@@ -49,7 +49,7 @@ const crossPath = (arr = [], player = "") => {
   return status.length > 0
 }
 
-const reverseCrossPath = (arr = [], player = "") => {
+const reverseCrossPath = (arr = [], player = '') => {
   const temp = arr.map((items = [], id) =>
     items.reduce((acc, cur, idx) => {
       const index = items.length - (idx + 1)
@@ -66,11 +66,22 @@ const reverseCrossPath = (arr = [], player = "") => {
   return status.length > 0
 }
 
-export const checkMovement = (arr = [], player = "") => {
+export const checkMovement = (arr = [], player = '') => {
   return (
     horizontalPath(arr, player) ||
     verticalPath(arr, player) ||
     crossPath(arr, player) ||
     reverseCrossPath(arr, player)
   )
+}
+
+export const CheckPossibilities = (paths = []) => {
+  const avail = paths.map((row = []) => {
+    const temp = row.filter(
+      (col = Object) => col.player === 'computer' && !col.status,
+    )
+    return temp.map((x = Object) => x.status)
+  })
+
+  return avail
 }

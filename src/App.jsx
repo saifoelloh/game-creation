@@ -1,36 +1,51 @@
-import React from 'react'
-import { BrowserRouter, useHistory, Route, Switch } from 'react-router-dom'
+import React, { useState } from 'react'
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'
+import {
+  Collapse,
+  Nav,
+  NavItem,
+  NavLink,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+} from 'reactstrap'
 
-import TicTacToe from './pages/tic-tac-toe/index.jsx'
-import './index.css'
+import TicTacToe from './pages/tic-tac-toe/index'
+import Cryptograph from './pages/cryptography/index'
 
 const Header = () => {
-  const history = useHistory()
+  const [isOpen, setIsOpen] = useState(false)
   const navbars = [
     {
-      title: 'Home',
+      title: 'home',
       url: '/',
     },
     {
-      title: 'TicTacToe',
+      title: 'tic tac toe',
       url: '/tic-tac-toe',
+    },
+    {
+      title: 'cryptograph',
+      url: '/cryptograph',
     },
   ]
 
   return (
-    <header className="navbar">
-      <ul className="navbar-content">
-        {navbars.map((item, key) => (
-          <li
-            key={key}
-            className="navbar-item"
-            onClick={() => history.push(item.url)}
-          >
-            {item.title}
-          </li>
-        ))}
-      </ul>
-    </header>
+    <Navbar color="dark" dark expand="md">
+      <NavbarBrand href="/">HHH</NavbarBrand>
+      <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className="mr-auto" navbar>
+          {navbars.map((item, key) => (
+            <NavItem key={key}>
+              <NavLink tag={Link} to={item.url} className="text-capitalize">
+                {item.title}
+              </NavLink>
+            </NavItem>
+          ))}
+        </Nav>
+      </Collapse>
+    </Navbar>
   )
 }
 
@@ -47,6 +62,7 @@ const App = () => {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/tic-tac-toe" component={TicTacToe} />
+        <Route path="/cryptograph" component={Cryptograph} />
       </Switch>
     </BrowserRouter>
   )

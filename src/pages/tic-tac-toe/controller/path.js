@@ -67,11 +67,29 @@ const reverseCrossPath = (arr = [], player = '') => {
 }
 
 export const checkMovement = (arr = [], player = '') => {
-  return (
-    horizontalPath(arr, player) ||
-    verticalPath(arr, player) ||
-    crossPath(arr, player) ||
-    reverseCrossPath(arr, player)
+  const temp = arr.map((items) => items.filter((x) => x.player === player))
+  const result = {
+    horizontal: [0, 0, 0],
+    vertical: [0, 0, 0],
+    cross: [0, 0],
+  }
+
+  temp.forEach((items, id) => {
+    const len = items.length - 1
+    result.horizontal[id] = items.reduce((acc, cur) => acc + cur, 0)
+    result.vertical[id] = items.reduce(
+      (acc, cur, idx) => acc + temp[idx][id],
+      0,
+    )
+    result.cross[0] = items.reduce((acc, cur, idx) => acc + temp[idx][idx], 0)
+    result.cross[1] = items.reduce(
+      (acc, cur, idx) => acc + temp[len - idx][len - idx],
+      0,
+    )
+  })
+
+  return Object.entries(result).some((items) =>
+    items.some((item) => item === 3),
   )
 }
 

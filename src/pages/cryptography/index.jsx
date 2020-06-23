@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { Col, Container, ListGroup, ListGroupItem, Row } from 'reactstrap'
 
-import { VigenereEncrypt } from './components/vigenere'
+import Vigenere from './components/vigenere'
 
 const Cryptograph = () => {
   const options = [
     {
       title: 'vigenere cipher',
-      component: <VigenereEncrypt />,
+      component: <Vigenere />,
     },
     {
       title: 'caesar cipher',
-      component: VigenereEncrypt,
+      component: <Vigenere />,
     },
   ]
   const [selectedAlgorithm, setSectedAlgorithm] = useState(options[0])

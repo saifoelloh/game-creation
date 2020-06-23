@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
+import Square from './components/square'
 import { checkMovement, checkSelection } from './controller/path'
 import { CheckPossibilities } from './controller/path.js'
 import '../../index.css'
@@ -84,6 +85,7 @@ const TicTacToe = () => {
         status: false,
       }),
     )
+    setTurn(0)
     setTics([...temp])
     setWin(false)
   }, [tics])
@@ -106,20 +108,11 @@ const TicTacToe = () => {
           {tics.map((row, id) => (
             <section key={id} className="tictactoe">
               {row.map((col, idx) => (
-                <div
+                <Square
                   key={idx}
-                  className="tictactoe-item"
                   onClick={() => handleClick(id, idx)}
-                  style={{
-                    backgroundColor: 'lightyellow',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '5rem',
-                  }}
-                >
-                  {col.player === '' ? '' : col.player === 'human' ? 'X' : 'O'}
-                </div>
+                  player={col.player}
+                />
               ))}
             </section>
           ))}

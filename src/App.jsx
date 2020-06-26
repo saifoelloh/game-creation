@@ -10,8 +10,9 @@ import {
   NavbarToggler,
 } from 'reactstrap'
 
-import TicTacToe from './pages/tic-tac-toe/index'
 import Cryptograph from './pages/cryptography/index'
+import TicTacToe from './pages/tic-tac-toe/index'
+import Fibonacci from './pages/fibonacci/index.jsx'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,6 +28,10 @@ const Header = () => {
     {
       title: 'cryptograph',
       url: '/cryptograph',
+    },
+    {
+      title: 'fibonacci num',
+      url: '/fibonacci',
     },
   ]
 
@@ -63,6 +68,7 @@ const App = () => {
         <Route path="/" component={Home} exact />
         <Route path="/tic-tac-toe" component={TicTacToe} />
         <Route path="/cryptograph" component={Cryptograph} />
+        <Route path="/fibonacci" component={Fibonacci} />
       </Switch>
     </BrowserRouter>
   )
